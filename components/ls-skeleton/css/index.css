@@ -1,0 +1,135 @@
+.border {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #DD524D;
+}
+
+/* 骨架种类 start*/
+.ls_line-sm {
+	height: 24rpx;
+	margin-bottom: 20rpx;
+}
+
+.ls_line {
+	height: 32rpx;
+	margin-bottom: 30rpx;
+}
+
+.ls_line-lg {
+	height: 48rpx;
+	margin-bottom: 30rpx;
+}
+
+.ls_card-sm {
+	height: 100rpx;
+	margin-bottom: 20rpx;
+}
+
+.ls_card {
+	height: 200rpx;
+	margin-bottom: 30rpx;
+}
+
+.ls_card-lg {
+	height: 300rpx;
+	margin-bottom: 30rpx;
+}
+
+.ls_circle-sm {
+	width: 50rpx;
+	height: 50rpx;
+	border-radius: 50rpx;
+	margin-bottom: 20rpx;
+}
+
+.ls_circle {
+	width: 100rpx;
+	height: 100rpx;
+	border-radius: 100rpx;
+	margin-bottom: 30rpx;
+}
+
+.ls_circle-lg {
+	width: 200rpx;
+	height: 200rpx;
+	border-radius: 200rpx;
+	margin-bottom: 30rpx;
+}
+
+.ls_square-sm {
+	width: 50rpx;
+	height: 50rpx;
+	margin-bottom: 20rpx;
+}
+
+.ls_square {
+	width: 100rpx;
+	height: 100rpx;
+	margin-bottom: 30rpx;
+}
+
+.ls_square-lg {
+	width: 200rpx;
+	height: 200rpx;
+	margin-bottom: 30rpx;
+}
+
+/* 骨架种类 end*/
+
+/* 辅助样式 under */
+.ls_skeleton-group {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	align-items: center;
+	/* margin-bottom: 30rpx; */
+}
+
+.ls_flex-sub {
+	flex: 1;
+}
+
+.ls_round {
+	border-radius: 48rpx;
+}
+
+.ls_radius {
+	border-radius: 8rpx;
+}
+
+
+.ls_ml {
+	margin-left: 20rpx;
+}
+
+.ls_animation {
+	background-color: #e6e6e6;
+	/* #ifndef APP-NVUE */
+	animation-name: twinkle;
+	animation-timing-function: inherit;
+	animation-duration: 1.8s;
+	animation-iteration-count: infinite;
+	/* #endif */
+}
+
+.ls_static {
+	background-color: #e6e6e6;
+}
+
+/* #ifndef APP-NVUE */
+@keyframes twinkle {
+	0% {
+		background-color: #e6e6e6;
+	}
+
+	50% {
+		background-color: #d3d3d3;
+	}
+
+	100% {
+		background-color: #e6e6e6;
+	}
+}
+
+/* #endif */

@@ -1,0 +1,164 @@
+<template>
+	<view class="page">
+		<ls-skeleton :animate="animate" :skeleton="skeleton" :loading="loading" ref="skeleton">
+			<!-- 加载结束后要显示内容，例如我这里显示个人信息 -->
+			<!-- 这里建议在最外层包裹一个没有指定class的view，不然可能会出现最外层class样式不生效的问题 -->
+			<view>
+				<view class="flex">
+					<image :src="avatar" class="avatar"></image>
+					<view class="info">
+						<view>
+							<text class="nickname">恭喜发财</text>
+						</view>
+						<view>
+							<text class="des">这个人很懒，懒得写个性签名</text>
+						</view>
+					</view>
+				</view>
+
+				<view class="config-wrap">
+					<view class="code"><text style="font-weight: bold;">skeleton内容配置项：</text></view>
+					<view class="flex mb" v-for="(item, index) in skeleton" :key="index">
+						<text class="tag" style="width: 580rpx;lines: 1;text-overflow: ellipsis;">{{item}}</text>
+						<icon type="clear" size="16" @click="deleteItem(index)" />
+					</view>
+
+					<view class="flex mt center">
+						<button class="button" type="primary" plain size="mini" @click="addItem">追加骨架项</button>
+						<button class="button" type="primary" size="mini" @click="action(true)">loading一下</button>
+					</view>
+				</view>
+			</view>
+		</ls-skeleton>
+	</view>
+</template>
+
+<script>
+	import lsSkeleton from '@/components/ls-skeleton/ls-skeleton.nvue';
+	export default {
+		components: {
+			lsSkeleton
+		},
+		data() {
+			return {
+				animate: true,
+				loading: true,
+				skeleton: [
+					'line-sm*3',
+					40,
+					'card',
+					'circle+line-sm*2',
+					'line',
+					'card-lg',
+					40,
+					'news',
+					'square+square+square+square+square+square',
+					'line-sm*3+square',
+				],
+				avatar: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3155998395,3600507640&fm=26&gp=0.jpg'
+			}
+		},
+		onLoad() {
+			this.action();
+		},
+		methods: {
+			action(again) {
+				// 修改ls-skeleton组件的skeleton参数后，再次执行，需要调用一次组件的init方法
+				if (again) {
+					// 关于组件init方法说明！！！：
+					// 注：通常骨架屏结构每个页面只有在页面最初加载时执行一次就不在使用了，所以正常使用时不需要调用init方法，只需要控制laoding就可以了
+					// 也就是说，你的页面中如果不涉及到skeleton参数内容的改变，就不需要调用init方法。反之需要在skeleton改变后调用一次init
+					this.$refs.skeleton.init();
+				}
+				this.loading = true;
+				setTimeout(() => {
+					this.loading = false;
+				}, 4000)
+			},
+			deleteItem(index) {
+				this.skeleton.splice(index, 1);
+			},
+			addItem() {
+				let itemList = ['line', 'card', 'circle', 'square', 'line*4', 'square+square+square', 100];
+				uni.showActionSheet({
+					itemList,
+					success: (res) => {
+						this.skeleton.push(itemList[res.tapIndex]);
+					}
+				})
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	.page {
+		padding: 30rpx;
+	}
+
+	.flex {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.center {
+		justify-content: center;
+	}
+
+	.avatar {
+		width: 100rpx;
+		height: 100rpx;
+		border-radius: 60rpx;
+	}
+
+	.info {
+		margin-left: 20rpx;
+		flex: 1;
+	}
+
+	.nickname {
+		font-size: 36rpx;
+		font-weight: bold;
+	}
+
+	.des {
+		margin-top: 10rpx;
+		font-size: 28rpx;
+		color: #999;
+	}
+
+	.code {
+		margin-bottom: 20rpx;
+	}
+
+	.tag {
+		background-color: #f1e8e8;
+		color: #ff4f54;
+		margin-right: 5px;
+		border-radius: 3px;
+		padding: 2px 5px;
+	}
+
+	.mb {
+		margin-bottom: 20rpx;
+	}
+
+	.mt {
+		margin-top: 40rpx;
+	}
+
+	.button {
+		margin-left: 0;
+		margin-right: 20rpx;
+	}
+
+	.config-wrap {
+		background-color: #f5f6fa;
+		padding: 20rpx;
+		border-radius: 10rpx;
+		margin-top: 30rpx;
+	}
+</style>
